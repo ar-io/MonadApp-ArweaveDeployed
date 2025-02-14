@@ -94,25 +94,69 @@ This will:
 
 #### Update AR.IO Name
 
-To use an ARNS name as your Arweave Dapp's URL, run the following command:
+> ⚠️ **Important**: You must first deploy your app using `pnpm run deploy` before setting up your ARNS name. Make sure you have a successful deployment before proceeding.
+
+To use an ARNS name as your Arweave Dapp's URL, follow these steps:
+
+1. Visit [arns.app](https://arns.app)
+2. Connect your Arweave wallet
+3. Purchase an ARNS name if you haven't already (requires $ARIO tokens)
+4. Click "Manage Assets" in the top-right
+5. Click the settings icon on your desired ARNS name
+6. Copy the Process ID
+7. Open `/scripts/arns.js` and update the `processId` in the `ant` configuration:
+```javascript
+const ant = ANT.init({
+    signer: new ArweaveSigner(jwk),
+    processId: 'YOUR_PROCESS_ID_HERE'
+});
+```
+8. Run the ARNS update command:
 ```bash
 pnpm run arns  # or yarn arns
 ```
+
 This will:
 - Update your AR.IO name with the latest deployment
 - Make your site available at: `https://{your-name}.ar.io`
 
 #### View AR.IO Records
+
+To view all records associated with your AR.IO name, follow these steps:
+
+1. Visit [arns.app](https://arns.app)
+2. Connect your Arweave wallet
+3. Click "Manage Assets" in the top-right
+4. Click the settings icon on your desired ARNS name
+5. Copy the Process ID
+6. Open `/scripts/getRecords.js` and update the `processId`:
+```javascript
+const ant = ANT.init({ 
+    processId: 'YOUR_PROCESS_ID_HERE'
+});
+```
+7. Run the records command:
 ```bash
 pnpm run records  # or yarn records
 ```
-Shows all records associated with your AR.IO name.
+This will display all records associated with your AR.IO name, including the current @ record if one exists.
 
 #### Get Primary Name
+
+To look up the primary name for any Arweave address:
+
+1. Copy the Arweave address you want to look up
+2. Run the primary name command with the address:
 ```bash
 pnpm run primary <arweave-address>  # or yarn primary <arweave-address>
 ```
-Looks up the primary name for any Arweave address.
+
+For example:
+```bash
+pnpm run primary vh-NTHVvlKZqRxc8LyyTNok65yQ55a_PJ1zWLb9G2JI
+```
+
+This will display the primary name associated with the provided Arweave address, if one exists.
 
 ## Development Workflow
 

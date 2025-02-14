@@ -4,7 +4,7 @@ async function getArnsRecords() {
     try {
         // Initialize ANT with your process ID
         const ant = ANT.init({ 
-            processId: '_d06OmgwYAuReZz0eG8gzMeTOEf6mvxcTS0CT_6ZD9A'
+            processId: 'YOUR_PROCESS_ID_HERE'
         });
 
         console.log('Fetching ARNS records...\n');

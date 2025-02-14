@@ -25,7 +25,7 @@ async function updateArns() {
         const ant = ANT.init({
             signer: new ArweaveSigner(jwk),
             // Using the processId from the docs example
-            processId: '_d06OmgwYAuReZz0eG8gzMeTOEf6mvxcTS0CT_6ZD9A'
+            processId: 'YOUR_PROCESS_ID_HERE'
         });
 
         // Using setRecord instead of setBaseNameRecord as per docs
