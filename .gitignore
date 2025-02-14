@@ -23,7 +23,8 @@ dist-ssr
 *.sln
 *.sw?
 
-wallet.jsonpackage-lock.json
+wallet.json
+package-lock.json
 pnpm-lock.yaml
 manifest.json
 .cursorrules
