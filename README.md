@@ -30,6 +30,9 @@ A comprehensive starter kit for building decentralized applications on Arweave u
 ## Quick Start
 
 1. Clone the repository
+```bash
+git clone https://github.com/PSkinnerTech/ZeroToArweave-StarterKit.git
+```
 2. Install dependencies:
 ```bash
 # Using pnpm
@@ -41,7 +44,7 @@ yarn install
 3. Place your Arweave wallet file in the project root as `wallet.json`
 4. Start the development server:
 ```bash
-pnpm dev  # or yarn dev
+pnpm run dev  # or yarn dev
 ```
 
 ## SDK Integration
@@ -79,7 +82,7 @@ pnpm preview  # or yarn preview
 
 #### Deploy to Arweave
 ```bash
-pnpm deploy  # or yarn deploy
+pnpm run deploy  # or yarn deploy
 ```
 This will:
 - Build your application
@@ -87,9 +90,13 @@ This will:
 - Generate a manifest file
 - Provide a deployment URL: `https://arweave.net/{manifestId}`
 
+> ⚠️ **Important**: You must have Turbo credits in your wallet for deployment to work. If you need Turbo credits, visit [turbo-topup.com](https://turbo-topup.com) to purchase some.
+
 #### Update AR.IO Name
+
+To use an ARNS name as your Arweave Dapp's URL, run the following command:
 ```bash
-pnpm arns  # or yarn arns
+pnpm run arns  # or yarn arns
 ```
 This will:
 - Update your AR.IO name with the latest deployment
@@ -97,28 +104,28 @@ This will:
 
 #### View AR.IO Records
 ```bash
-pnpm records  # or yarn records
+pnpm run records  # or yarn records
 ```
 Shows all records associated with your AR.IO name.
 
 #### Get Primary Name
 ```bash
-pnpm primary <arweave-address>  # or yarn primary <arweave-address>
+pnpm run primary <arweave-address>  # or yarn primary <arweave-address>
 ```
 Looks up the primary name for any Arweave address.
 
 ## Development Workflow
 
 1. Make changes to your application
-2. Test locally with `pnpm dev`
-3. Build with `pnpm build`
-4. Deploy with `pnpm deploy`
-5. Update AR.IO name with `pnpm arns`
-6. Verify records with `pnpm records`
+2. Test locally with `pnpm run dev`
+3. Build with `pnpm run build`
+4. Deploy with `pnpm run deploy`
+5. Update AR.IO name with `pnpm run arns`
+6. Verify records with `pnpm run records`
 
 ## Important Notes
 
-- Never commit your `wallet.json` to version control
+- Never commit your Arweave Keyfile to version control, it's currently in the `.gitignore` file as long as you name your keyfile `wallet.json`.
 - Keep your manifest ID after deployment
 - AR.IO name updates may take a few minutes to propagate
 - Default TTL for name records is 15 minutes
