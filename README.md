@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="https://arweave.net/Iodraq9lSkvwvWKdHmKIs54STnKkCNK-YuS5c4avAyE" alt="Zero to Arweave Starter Kit Banner" width="100%" />
+</p>
+
 # Arweave Starter Kit
 
 A comprehensive starter kit for building decentralized applications on Arweave using React, Vite, and three powerful SDKs:
