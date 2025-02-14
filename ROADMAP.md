@@ -1,6 +1,6 @@
 # Arweave Starter Kit Development Roadmap
 
-## Phase 1: Project Setup and Base Configuration
+## Phase 1: Project Setup and Base Configuration ✅
 - [x] Initialize Vite project with React and JavaScript
   - [x] Create project using `npm create vite@latest`
   - [x] Select React template
@@ -15,7 +15,7 @@
   - [x] Create types directory
   - [x] Create utils directory
 
-## Phase 2: Arweave Wallet Integration
+## Phase 2: Arweave Wallet Integration ✅
 - [x] Install Arweave Wallet Kit
   - [x] Add dependencies: `arweave-wallet-kit`
   - [x] Configure wallet provider
@@ -29,7 +29,7 @@
   - [x] Wallet status display
   - [x] Address display with copy functionality
 
-## Phase 3: ar.io SDK Integration
+## Phase 3: ar.io SDK Integration ✅
 - [x] Install ar.io SDK
   - [x] Add dependencies
   - [x] Configure SDK initialization
@@ -42,12 +42,12 @@
   - [x] Implement record retrieval script
   - [x] Implement getPrimaryName functionality
   - [x] Add proper error handling for name resolution
-- [ ] Create username display components
-  - [ ] Username resolution component
-  - [ ] Username update interface
-  - [ ] Error handling for ARNS operations
+- [x] Create username display components
+  - [x] Username resolution component with loading state
+  - [x] Primary name display in navbar
+  - [x] Error handling for ARNS operations
 
-## Phase 4: Turbo SDK Integration
+## Phase 4: Turbo SDK Integration ✅
 - [x] Install Turbo SDK
   - [x] Add dependencies
   - [x] Configure SDK initialization
@@ -60,7 +60,17 @@
   - [x] Add deployment status tracking
   - [x] Implement deployment history
 
-## Phase 5: Testing and Documentation
+## Phase 5: Routing and Navigation ✅
+- [x] Implement hash routing
+  - [x] Add react-router-dom
+  - [x] Configure HashRouter
+  - [x] Set up route components
+- [x] Create navigation structure
+  - [x] Implement protected routes
+  - [x] Add navigation components
+  - [x] Handle route transitions
+
+## Phase 6: Testing and Documentation 🚧
 - [ ] Set up testing environment
   - [ ] Configure Jest/Vitest
   - [ ] Add React Testing Library
@@ -69,13 +79,13 @@
   - [ ] Wallet connection tests
   - [ ] ARNS operation tests
   - [ ] Deployment process tests
-- [ ] Create documentation
-  - [ ] Write README.md
-  - [ ] Add installation guide
-  - [ ] Create usage examples
-  - [ ] Document all available features
+- [x] Create documentation
+  - [x] Write README.md
+  - [x] Add installation guide
+  - [x] Create usage examples
+  - [x] Document all available features
 
-## Phase 6: Examples and Templates
+## Phase 7: Examples and Templates 🚧
 - [ ] Create example components
   - [ ] Basic wallet interaction
   - [ ] ARNS name management
@@ -89,7 +99,7 @@
   - [ ] Standard configuration
   - [ ] Full-featured configuration
 
-## Phase 7: Optimization and Polish
+## Phase 8: Optimization and Polish 🚧
 - [x] Performance optimization
   - [x] Implement code splitting
   - [x] Optimize bundle size
@@ -103,7 +113,7 @@
   - [ ] Add user-friendly error messages
   - [ ] Create fallback UI states
 
-## Final Steps
+## Final Steps 🚧
 - [ ] End-to-end testing
   - [ ] Test complete user flows
   - [ ] Verify all integrations
