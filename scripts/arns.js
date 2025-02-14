@@ -38,7 +38,7 @@ async function updateArns() {
             {
                 tags: [{
                     name: 'App-Name',
-                    value: 'arweave-starter-kit'
+                    value: 'ZeroToArweave-StarterKit'
                 }]
             }
         );

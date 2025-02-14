@@ -2,7 +2,7 @@
   <img src="https://arweave.net/Iodraq9lSkvwvWKdHmKIs54STnKkCNK-YuS5c4avAyE" alt="Zero to Arweave Starter Kit Banner" width="100%" />
 </p>
 
-# Arweave Starter Kit
+# Zero to Arweave Starter Kit
 
 A comprehensive starter kit for building decentralized applications on Arweave using React, Vite, and three powerful SDKs:
 
@@ -137,4 +137,4 @@ Contributions are welcome! Please read our contributing guidelines for details.
 
 ## License
 
-This project is licensed under the MIT License - see the LICENSE file for details.# arweave-dapp-starter-kit
+This project is licensed under the MIT License - see the LICENSE file for details.# ZeroToArweave-StarterKit

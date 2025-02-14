@@ -15,7 +15,7 @@ function App() {
           <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex flex-col items-center justify-center min-h-[calc(100vh-4rem)]">
               <h1 className="text-3xl font-bold mb-8">
-                Welcome to Arweave Starter Kit
+                Welcome to the "Zero to Arweave Starter Kit"
               </h1>
               
               {connected ? (
