@@ -24,6 +24,6 @@ export default defineConfig({
     indexHtmlHash,
     nodePolyfills(),
   ],
-  base: "/",
+  base: "./",
   build: {},
 });
