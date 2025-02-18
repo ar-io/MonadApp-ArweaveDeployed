@@ -24,6 +24,14 @@ export default defineConfig({
     indexHtmlHash,
     nodePolyfills(),
   ],
-  base: "/",
-  build: {},
+  base: "./",
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          react: ["react", "react-dom"],
+        },
+      },
+    },
+  },
 });
