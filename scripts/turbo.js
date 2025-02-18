@@ -11,18 +11,12 @@ export default async function TurboDeploy(jwk) {
     const turbo = TurboFactory.authenticated({ privateKey: jwk });
     const deployFolder = './dist';
 
-    // Load or create manifest
-    let manifest;
-    try {
-        manifest = JSON.parse(fs.readFileSync('manifest.json', 'utf-8'));
-    } catch {
-        manifest = {
-            manifest: 'arweave/paths',
-            version: '0.2.0',
-            index: { path: '' },
-            paths: {}
-        };
-    }
+    let manifest = {
+        manifest: 'arweave/paths',
+        version: '0.2.0',
+        index: { path: '' },
+        paths: {}
+    };
 
     async function processFiles(dir) {
         const files = fs.readdirSync(dir);
@@ -37,8 +31,6 @@ export default async function TurboDeploy(jwk) {
                 await processFiles(filePath);
                 continue;
             }
-
-            if (manifest.paths[relativePath]) continue;
 
             console.log(`Uploading: ${relativePath}`);
             const uploadResult = await turbo.uploadFile({
@@ -69,10 +61,9 @@ export default async function TurboDeploy(jwk) {
         manifest.index.path = indexPath;
     }
 
-    // Upload the manifest file
-    const uploadResult = await turbo.uploadFile({
-        fileStreamFactory: () => fs.createReadStream('manifest.json'),
-        fileSizeFactory: () => fs.statSync('manifest.json').size,
+    const manifestResult = await turbo.uploadFile({
+        fileStreamFactory: () => Buffer.from(JSON.stringify(manifest, null, 2)),
+        fileSizeFactory: () => Buffer.from(JSON.stringify(manifest, null, 2)).length,
         dataItemOpts: {
             tags: [{
                 name: 'Content-Type',
@@ -81,9 +72,5 @@ export default async function TurboDeploy(jwk) {
         },
     });
 
-    // Store the manifest ID in the manifest file
-    manifest.id = uploadResult.id;
-    fs.writeFileSync('manifest.json', JSON.stringify(manifest, null, 2));
-
-    return uploadResult.id;
+    return manifestResult.id;
 }
