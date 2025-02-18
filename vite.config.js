@@ -25,5 +25,13 @@ export default defineConfig({
     nodePolyfills(),
   ],
   base: "./",
-  build: {},
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          react: ["react", "react-dom"],
+        },
+      },
+    },
+  },
 });
