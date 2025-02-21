@@ -28,20 +28,11 @@ async function updateArns() {
             processId: 'YOUR_PROCESS_ID_HERE'
         });
 
-        // Using setRecord instead of setBaseNameRecord as per docs
-        const { id: txId } = await ant.setRecord(
-            {
-                undername: '@',  // @ represents the top level name
-                transactionId: manifest.id,
-                ttlSeconds: 900 // 15 minutes
-            },
-            {
-                tags: [{
-                    name: 'App-Name',
-                    value: 'ZeroToArweave-StarterKit'
-                }]
-            }
-        );
+        // Updated to use setBaseNameRecord instead of setRecord
+        const { id: txId } = await ant.setBaseNameRecord({
+            transactionId: manifest.id,
+            ttlSeconds: 900 // 15 minutes
+        });
 
         console.log('\nARNS Update Complete! 🎉');
         console.log(`Transaction ID: ${txId}`);

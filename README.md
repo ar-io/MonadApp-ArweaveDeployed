@@ -104,7 +104,7 @@ To use an ARNS name as your Arweave Dapp's URL, follow these steps:
 4. Click "Manage Assets" in the top-right
 5. Click the settings icon on your desired ARNS name
 6. Copy the Process ID
-7. Open `/scripts/arns.js` and update the `processId` in the `ant` configuration:
+7. Open `/scripts/setBaseArns.js` and update the `processId` in the `ant` configuration:
 ```javascript
 const ant = ANT.init({
     signer: new ArweaveSigner(jwk),
@@ -113,12 +113,25 @@ const ant = ANT.init({
 ```
 8. Run the ARNS update command:
 ```bash
-pnpm run arns  # or yarn arns
+pnpm run set-base  # or yarn set-base
 ```
 
 This will:
 - Update your AR.IO name with the latest deployment
 - Make your site available at: `https://{your-name}.ar.io`
+
+#### Set Undername Record
+
+To set an undername record for your AR.IO name:
+
+1. Make sure you have completed the base name setup above
+2. Open `/scripts/setUndername.js` and update the `processId`
+3. Run the undername command:
+```bash
+pnpm run set-undername  # or yarn set-undername
+```
+
+This will create an undername record that makes your site available at: `https://{undername}_{your-name}.ar.io`
 
 #### View AR.IO Records
 
@@ -164,8 +177,9 @@ This will display the primary name associated with the provided Arweave address,
 2. Test locally with `pnpm run dev`
 3. Build with `pnpm run build`
 4. Deploy with `pnpm run deploy`
-5. Update AR.IO name with `pnpm run arns`
-6. Verify records with `pnpm run records`
+5. Update AR.IO name with `pnpm run set-base`
+6. Set undername (if needed) with `pnpm run set-undername`
+7. Verify records with `pnpm run records`
 
 ## Important Notes
 
