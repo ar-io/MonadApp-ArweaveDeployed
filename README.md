@@ -1,205 +1,228 @@
-<p align="center">
-  <img src="https://arweave.net/Iodraq9lSkvwvWKdHmKIs54STnKkCNK-YuS5c4avAyE" alt="Zero to Arweave Starter Kit Banner" width="100%" />
-</p>
+# Monad Staking App Starter Kit
 
-# Zero to Arweave Starter Kit
+> **Special Thanks**: This project wouldn't be possible without the incredible work of [Oceans404](https://github.com/oceans404), who created the original [monad-stake-gate-ui](https://github.com/oceans404/monad-stake-gate-ui) and [monad-app-stake-gate](https://github.com/oceans404/monad-app-stake-gate) contracts. 
 
-A comprehensive starter kit for building decentralized applications on Arweave using React, Vite, and three powerful SDKs:
+A ready-to-use template for building staking applications on the Monad blockchain with seamless Arweave deployment. This starter kit provides a complete foundation for content-gating applications using Monad token staking.
 
-- [Arweave Wallet Kit](https://docs.arweavekit.com/arweave-wallet-kit/introduction) - Unified wallet interaction
-- [AR.IO SDK](https://docs.ar.io/build/ar-io-sdk/getting-started) - Gateway and name system integration
-- [Turbo SDK](https://docs.ardrive.io/docs/turbo/turbo-sdk/#installation) - Fast and efficient data uploads
+![monad stake app](https://github.com/user-attachments/assets/be73413a-e05b-4be9-b8a9-82a611660b2a)
 
-## Prerequisites
+## Smart Contract Repositories
 
-- Node.js 16+
-- Package manager (pnpm or yarn)
-- An Arweave wallet (JSON file)
-- An AR.IO name (get one at https://arns.app)
+- **Original Frontend Template**: [monad-stake-gate-ui](https://github.com/oceans404/monad-stake-gate-ui) by Oceans404
+- **Smart Contract**: [monad-app-stake-gate](https://github.com/oceans404/monad-app-stake-gate) by Oceans404
 
 ## Features
 
-- 🔐 **Wallet Integration** - Seamless wallet connection with Arweave Wallet Kit
-- 📝 **Name System** - AR.IO name system integration for human-readable addresses
-- 🚀 **Fast Uploads** - Turbo-powered deployments for efficient data uploads
-- 🎨 **Modern UI** - Clean, responsive interface with Tailwind CSS
-- 📱 **Mobile Ready** - Fully responsive design that works on all devices
-- 🛠️ **Developer Tools** - Comprehensive scripts for deployment and management
-- 🔗 **Hash Routing** - Client-side routing that works with Arweave's permanent storage
+- **Monad Blockchain Integration**: Connect wallets, stake tokens, and verify staking status
+- **Content Gating**: Premium content accessible only to users who have staked tokens
+- **Arweave Permanent Storage**: Deploy your application to the permaweb with one command
+- **ARNS Compatibility**: Set custom Arweave domain names with the included undername scripts
+- **Modern Tech Stack**: Built with React, Vite, Tailwind CSS, and wagmi for wallet connections
 
-## Quick Start
+> **Note:** This frontend template works with the [StakingGateFactory](https://github.com/oceans404/monad-app-stake-gate) smart contract.
 
-1. Clone the repository
+## 🚀 Quick Start
+
+### 1. Create Your App's Staking Contract
+
+- Visit the [StakingGateFactory contract](https://testnet.monadexplorer.com/address/0x7c809EA8370B2efD01b3f175Be3Aab970b66Ded3?tab=Contract) on Monad Explorer
+- Connect your wallet
+- Select **Write Contract** → **createStakingGate**
+- Enter your parameters:
+  - `requiredStakeAmount`: Your desired MON amount (e.g., 0.0069)
+  - `name`: A name for your app (e.g., "MyAwesomeApp")
+- Execute the transaction and save your new contract address - this is the address of the staking contract for your app
+
+Alternative methods:
+
+**Using Forge/Cast (Command Line):**
 ```bash
-git clone https://github.com/PSkinnerTech/ZeroToArweave-StarterKit.git
-```
-2. Install dependencies:
-```bash
-# Using pnpm
-pnpm install
-
-# OR using yarn
-yarn install
-```
-3. Place your Arweave wallet file in the project root as `wallet.json`
-4. Start the development server:
-```bash
-pnpm run dev  # or yarn dev
-```
-
-## SDK Integration
-
-### Arweave Wallet Kit
-- Handles wallet connections and transactions
-- Provides React hooks for wallet state
-- Manages wallet permissions and address access
-
-### AR.IO SDK
-- Manages AR.IO name system integration
-- Handles record updates and primary name resolution
-- Provides gateway integration features
-
-### Turbo SDK
-- Powers fast and efficient deployments
-- Handles manifest generation
-- Manages data uploads to Arweave
-
-## Available Scripts
-
-### Development
-```bash
-# Start development server
-pnpm dev  # or yarn dev
-
-# Build for production
-pnpm build  # or yarn build
-
-# Preview production build
-pnpm preview  # or yarn preview
+cast send 0x7c809EA8370B2efD01b3f175Be3Aab970b66Ded3 "createStakingGate(uint256,string)" YOUR_STAKE_AMOUNT_IN_WEI "YOUR_APP_NAME" --account YOUR_ACCOUNT_NAME
 ```
 
-### Deployment Scripts
-
-#### Deploy to Arweave
+Example (Creating a contract requiring 0.01 MON):
 ```bash
-pnpm run deploy  # or yarn deploy
+cast send 0x7c809EA8370B2efD01b3f175Be3Aab970b66Ded3 "createStakingGate(uint256,string)" 10000000000000000 "MyNewApp" --account monad
 ```
+
+**Using Web3 JS/Ethers:**
+```javascript
+const factory = new ethers.Contract(
+  '0x7c809EA8370B2efD01b3f175Be3Aab970b66Ded3',
+  factoryAbi,
+  signer
+);
+
+const tx = await factory.createStakingGate(
+  ethers.utils.parseEther('0.01'),
+  'MyNewApp'
+);
+
+const receipt = await tx.wait();
+console.log(
+  'New contract created at:',
+  receipt.events[0].args.stakingGateAddress
+);
+```
+
+### 2. Clone This Template
+
+```bash
+git clone [this repo]
+cd [repo name]
+npm install
+```
+
+### 3. Update Contract Address
+
+- Open `src/hooks/useStakingContract.js`
+- Replace the `STAKING_CONTRACT_ADDRESS` value with your new contract address:
+
+```javascript
+// 🎯🎯🎯🎯 UPDATE ME!!!!!!!!
+// update this to your app's staking contract, created with the above factory
+export const STAKING_CONTRACT_ADDRESS = '0xYourNewContractAddressHere';
+```
+
+### 4. Customize Content
+
+- Update public content in `src/components/PublicContent.jsx`
+- Update gated content in `src/components/GatedContent.jsx`
+- Modify app name, colors, and other branding elements
+
+### 5. Test Locally
+
+```bash
+npm run dev
+```
+
+## 🏗️ Deploying to Arweave
+
+### Prerequisites
+
+- Node.js 16+
+- An Arweave wallet (JSON file)
+- Turbo credits for uploads (get at [turbo-topup.com](https://turbo-topup.com))
+
+### Deployment Steps
+
+1. Place your Arweave wallet file in the project root as `wallet.json`
+2. Build your application:
+```bash
+npm run build
+```
+3. Deploy to Arweave:
+```bash
+npm run deploy
+```
+
 This will:
-- Build your application
-- Upload to Arweave via Turbo
+- Upload your application to Arweave via Turbo
 - Generate a manifest file
 - Provide a deployment URL: `https://arweave.net/{manifestId}`
 
-> ⚠️ **Important**: You must have Turbo credits in your wallet for deployment to work. If you need Turbo credits, visit [turbo-topup.com](https://turbo-topup.com) to purchase some.
+### ARNS Name Integration
 
-#### Update AR.IO Name
+#### Update ARNS Undername
 
-> ⚠️ **Important**: You must first deploy your app using `pnpm run deploy` before setting up your ARNS name. Make sure you have a successful deployment before proceeding.
+To use an ARNS undername for your Arweave Dapp's URL:
 
-To use an ARNS name as your Arweave Dapp's URL, follow these steps:
-
-1. Visit [arns.app](https://arns.app)
-2. Connect your Arweave wallet
-3. Purchase an ARNS name if you haven't already (requires $ARIO tokens)
-4. Click "Manage Assets" in the top-right
-5. Click the settings icon on your desired ARNS name
-6. Copy the Process ID
-7. Open `/scripts/setBaseArns.js` and update the `processId` in the `ant` configuration:
-```javascript
-const ant = ANT.init({
-    signer: new ArweaveSigner(jwk),
-    processId: 'YOUR_PROCESS_ID_HERE'
-});
-```
-8. Run the ARNS update command:
+1. Ensure you have an ARNS primary name (get one at [arns.app](https://arns.app))
+2. Run the undername command:
 ```bash
-pnpm run set-base  # or yarn set-base
+npm run set-undername
 ```
 
-This will:
-- Update your AR.IO name with the latest deployment
-- Make your site available at: `https://{your-name}.ar.io`
+This will create an undername record making your site available at: `https://{undername}_{yourprimaryname}.ar.io`
 
-#### Set Undername Record
+For example, if your primary name is "myname" and you set the undername to "monad-stake", your app would be available at: `https://monad-stake_myname.ar.io`
 
-To set an undername record for your AR.IO name:
+## ✨ Template Features
 
-1. Make sure you have completed the base name setup above
-2. Open `/scripts/setUndername.js` and update the `processId`
-3. Run the undername command:
+- **Wallet Connection**: Easy integration with Web3 wallets via Wagmi
+- **Monad Integration**: Built specifically for Monad blockchain
+- **Customizable Staking**: Set your own MON staking requirements
+- **Public/Gated Content**: Clear separation between public and staker-only content
+- **Responsive Design**: Works on all devices
+- **Permanent Storage**: Deploy once to Arweave for permanent availability
+
+## 📋 Project Structure
+
+- `src/hooks/useStakingContract.js` - Configure your staking contract address
+- `src/components/PublicContent.jsx` - Content visible to everyone
+- `src/components/GatedContent.jsx` - Content only visible to stakers
+- `src/components/StakingInterface.jsx` - Interface for staking tokens
+- `src/components/NavBar.jsx` - App header with wallet connection
+- `scripts/` - Deployment and Arweave integration scripts
+
+## 🧪 Monad Contract Information
+
+### Factory Contract
+
+- **Address**: `0x7c809EA8370B2efD01b3f175Be3Aab970b66Ded3`
+- **Network**: Monad Testnet
+- **Purpose**: Creates new staking contracts with customizable parameters
+
+### Interacting with Staking Contracts
+
+To stake (exactly the required amount):
 ```bash
-pnpm run set-undername  # or yarn set-undername
+cast send YOUR_STAKING_CONTRACT_ADDRESS "stake()" --value YOUR_STAKE_AMOUNT_IN_WEI --account YOUR_ACCOUNT_NAME
 ```
 
-This will create an undername record that makes your site available at: `https://{undername}_{your-name}.ar.io`
-
-#### View AR.IO Records
-
-To view all records associated with your AR.IO name, follow these steps:
-
-1. Visit [arns.app](https://arns.app)
-2. Connect your Arweave wallet
-3. Click "Manage Assets" in the top-right
-4. Click the settings icon on your desired ARNS name
-5. Copy the Process ID
-6. Open `/scripts/getRecords.js` and update the `processId`:
-```javascript
-const ant = ANT.init({ 
-    processId: 'YOUR_PROCESS_ID_HERE'
-});
-```
-7. Run the records command:
+To check if an address is a staker:
 ```bash
-pnpm run records  # or yarn records
+cast call YOUR_STAKING_CONTRACT_ADDRESS "isStaker(address)(bool)" ADDRESS_TO_CHECK
 ```
-This will display all records associated with your AR.IO name, including the current @ record if one exists.
 
-#### Get Primary Name
-
-To look up the primary name for any Arweave address:
-
-1. Copy the Arweave address you want to look up
-2. Run the primary name command with the address:
+To withdraw your stake:
 ```bash
-pnpm run primary <arweave-address>  # or yarn primary <arweave-address>
+cast send YOUR_STAKING_CONTRACT_ADDRESS "withdraw()" --account YOUR_ACCOUNT_NAME
 ```
 
-For example:
+### Finding Your Created Contracts
+
+To get all contracts you've created:
 ```bash
-pnpm run primary vh-NTHVvlKZqRxc8LyyTNok65yQ55a_PJ1zWLb9G2JI
+cast call 0x7c809EA8370B2efD01b3f175Be3Aab970b66Ded3 "getStakingGatesByCreator(address)(address[])" YOUR_ADDRESS
 ```
 
-This will display the primary name associated with the provided Arweave address, if one exists.
+## 📝 Available Scripts
 
-## Development Workflow
+```bash
+# Development
+npm run dev          # Start development server
+npm run build        # Build for production
+npm run preview      # Preview production build
 
-1. Make changes to your application
-2. Test locally with `pnpm run dev`
-3. Build with `pnpm run build`
-4. Deploy with `pnpm run deploy`
-5. Update AR.IO name with `pnpm run set-base`
-6. Set undername (if needed) with `pnpm run set-undername`
-7. Verify records with `pnpm run records`
+# Arweave Deployment
+npm run deploy       # Deploy to Arweave
 
-## Important Notes
+# ARNS Integration
+npm run set-base     # Set your base ARNS name as the domain for your app
+npm run set-undername  # Set an undername record for your ARNS primary name
+npm run records      # Retrieve transaction details of an ARNS name
+```
 
-- Never commit your Arweave Keyfile to version control, it's currently in the `.gitignore` file as long as you name your keyfile `wallet.json`.
+## ⚠️ Important Notes
+
+- Never commit your Arweave Keyfile to version control
 - Keep your manifest ID after deployment
-- AR.IO name updates may take a few minutes to propagate
+- ARNS name updates may take a few minutes to propagate
 - Default TTL for name records is 15 minutes
-- Ensure proper permissions are granted when connecting wallets
+- The difference between `set-base` and `set-undername`:
+  - `set-base`: Points your base ARNS name directly to your app (e.g., `yourname.ar.io`)
+  - `set-undername`: Creates a subdomain-like record under your primary name (e.g., `app_yourname.ar.io`)
 
-## Troubleshooting
+## 📝 License
 
-- If deployment fails, check your wallet balance
-- If name updates fail, verify your AR.IO name ownership
-- For wallet connection issues, ensure proper permissions
-- Check the console for detailed error messages
+This project is licensed under the MIT License - see the LICENSE file for details.
 
-## Contributing
+## 🤝 Contributing
 
-Contributions are welcome! Please read our contributing guidelines for details.
+Contributions are welcome! Please feel free to submit a pull request.
 
-## License
+---
 
-This project is licensed under the MIT License - see the  LICENSE file for details.
+Original staking app by [Oceans404](https://github.com/oceans404/monad-stake-gate-ui)  
+Arweave deployment template by [PSkinnerTech](https://github.com/PSkinnerTech/)# MonadApp-ArweaveDeployed
