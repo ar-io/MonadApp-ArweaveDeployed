@@ -226,3 +226,4 @@ Contributions are welcome! Please feel free to submit a pull request.
 
 Original staking app by [Oceans404](https://github.com/oceans404/monad-stake-gate-ui)  
 Arweave deployment template by [PSkinnerTech](https://github.com/PSkinnerTech/)# MonadApp-ArweaveDeployed
+# MonadApp-ArweaveDeployed
